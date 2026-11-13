@@ -1,0 +1,22 @@
+diff --git a/osfmk/arm64/start.s b/osfmk/arm64/start.s
+index 00b0198..7c89470 100644
+--- a/osfmk/arm64/start.s
++++ b/osfmk/arm64/start.s
+@@ -1142,10 +1142,15 @@ La5_text_skip_pixel:
+ La5_text_done:
+ 	dsb	sy
+ 	ret
++/* (0333) The two lines drawn at the start of the boot. Put any ASCII text between the quotes (8x16 font drawn at 2x,
++ * 16 pixels per character, 24 characters fit across), or leave them empty for a clean screen. The colored stage
++ * squares are drawn elsewhere and are not affected. */
++#define HERO_BOOT_LINE_ENTRY ""
++#define HERO_BOOT_LINE_MMU ""
+ La5_text_entry:
+-	.asciz "XNU ENTRY"
++	.asciz HERO_BOOT_LINE_ENTRY
+ La5_text_mmu:
+-	.asciz "XNU MMU ON"
++	.asciz HERO_BOOT_LINE_MMU
+ #endif
+ 
+ //#include	"globals_asm.h"
